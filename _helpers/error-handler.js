@@ -1,5 +1,8 @@
 module.exports = errorHandler;
 
+// global error handler
+// 에러 핸들러를 한 곳으로 집중시킴.
+// middle ware 로, server.js 파일에서 관리
 function errorHandler(err, req, res, next) {
     if (typeof (err) === 'string') {
         // custom application error
