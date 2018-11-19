@@ -20,5 +20,6 @@ db.once('open', () => console.log('Connected'));
 // table 이 추가되면 db.js 에서 export 를 해줘야 module 에서 사용
 module.exports = {
     User: require('../users/user.model'),
-    Todo: require('../todos/todo.model')
+    Todo: require('../todos/todo.model'),
+    Completed: require('../completed/completed.model'),
 };

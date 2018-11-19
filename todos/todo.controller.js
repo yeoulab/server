@@ -16,7 +16,8 @@ function createTodo(req, res, next) {
 }
 
 function getByUserId(req, res, next) {
-    console.loge("getByUserId Start");
-    todoService.getByUserId(req.body).then(todos => res.json(todos))
+    console.log("getByUserId Start");
+    console.log(req.params.id);
+    todoService.getByUserId(req.params.id).then(todos => res.json(todos))
     .catch(err => next(err));;
 }
