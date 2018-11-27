@@ -1,11 +1,11 @@
 {
-    "name": "node-mongo-registration-login-api",
+    "name": "server",
     "version": "1.0.0",
     "description": "NodeJS + MongoDB API for User Management, Authentication and Registration",
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/cornflourblue/node-mongo-registration-login-api.git"
+        "url": "https://github.com/yeoulab/server"
     },
     "scripts": {
         "start": "nodemon ./server.js"
