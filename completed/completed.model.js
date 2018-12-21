@@ -4,9 +4,9 @@ const Schema = mongoose.Schema;
 // 스키마 정의
 const schema = new Schema({
     todoName: { type: String, unique: true, required: true },
-    completedDate: { type: Date, default: Date.now },
-    userId: { type : String, required: true },
-    todoId: { type : String, required: true }
+    completedDate: { type: String, required: true },
+    userId: { type: String, required: true },
+    todoId: { type: String, required: true }
 });
 
 // json 형태로 변환

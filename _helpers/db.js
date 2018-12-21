@@ -21,5 +21,5 @@ db.once('open', () => console.log('Connected'));
 module.exports = {
     User: require('../users/user.model'),
     Todo: require('../todos/todo.model'),
-    Completed: require('../todos/completed.model'),
+    Completed: require('../completed/completed.model'),
 };
