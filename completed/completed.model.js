@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 // 스키마 정의
 const schema = new Schema({
-    todoName: { type: String, unique: true, required: true },
+    todoName: { type: String, required: true },
     completedDate: { type: String, required: true },
     userId: { type: String, required: true },
     todoId: { type: String, required: true }

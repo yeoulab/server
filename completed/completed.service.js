@@ -10,25 +10,25 @@ const Completed = db.Completed;
 module.exports = {
     completeTodo,
     getCompletedTodo,
+    rmCompletedTodo,
 };
 
 async function completeTodo(todoParam) {
     // validate
     console.log("completeTodo Start");
-    // console.log(todoParam);
-    // if (await Todo.findOne({
-    //         todoId: todoParam.todo.todoId,
-    //         completedDate: todoParam.todo.completedDate
-    //     })) {
-    //     // 존재하면 에러처리
-    //     console.log("중복존재");
-    //     throw 'Todoname "' + todoParam.todoParam.todo.todoName + '" is already taken';
-    // }
-    // console.log(todoParam.todo);
     const completedTodo = new Completed(todoParam.todo);
     // console.log(completedTodo);
 
-    await completedTodo.save();
+    await completedTodo.save((err) => {
+        console.log(err);
+    })
+}
+
+async function rmCompletedTodo(todo) {
+    console.log("rmCompletedTodo");
+    await Completed.findByIdAndRemove({ _id: todo.completedTodoId }, (err) => {
+        console.log(err);
+    });
 }
 
 async function getCompletedTodo(userId, completedDate) {
