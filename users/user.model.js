@@ -3,10 +3,9 @@ const Schema = mongoose.Schema;
 
 // 스키마 정의
 const schema = new Schema({
-    username: { type: String, unique: true, required: true },
+    email: { type: String, unique: true, required: true },
+    username: { type: String, required: true },
     hash: { type: String, required: true },
-    firstName: { type: String, required: true },
-    lastName: { type: String, required: true },
     createdDate: { type: Date, default: Date.now }
 });
 

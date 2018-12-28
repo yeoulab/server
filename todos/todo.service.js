@@ -18,16 +18,18 @@ async function createTodo(todoParam) {
     console.log("create Todo Start");
     console.log(todoParam);
     console.log(todoParam.todo.todoName);
-    if (await Todo.findOne({ todoName: todoParam.todo.todoName, userId: todoParam.todo.userId })) {
-        // 존재하면 에러처리
-        console.log("중복존재");
-        throw 'Todoname "' + todoParam.todoParam.todo.todoName + '" is already taken';
-    }
+    // if (await Todo.findOne({ todoName: todoParam.todo.todoName, userId: todoParam.todo.userId })) {
+    //     // 존재하면 에러처리
+    //     console.log("중복존재");
+    //     throw 'Todoname "' + todoParam.todoParam.todo.todoName + '" is already taken';
+    // }
     console.log(todoParam.todo);
     const todo = new Todo(todoParam.todo);
     console.log(todo);
 
-    await todo.save();
+    await todo.save((err) => {
+        console.log(err);
+    });
 }
 
 async function removeTodo(todoId) {

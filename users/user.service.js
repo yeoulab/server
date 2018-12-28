@@ -16,10 +16,11 @@ module.exports = {
     delete: _delete
 };
 
-async function authenticate({ username, password }) {
+async function authenticate({ email, password }) {
     // jwt 를 사용하면 user 의 session 을 관리할 필요가 없음
     console.log("authentication Start");
-    const user = await User.findOne({ username });
+    console.log("email : " + email);
+    const user = await User.findOne({ email: email });
     // user 를 받아와야 아래를 실행한다.
 
     // user 가 존재하고
@@ -51,9 +52,9 @@ async function create(userParam) {
     // User  내에서 username 으로 대상을 조회해서
     //console.log("create User Start");
     ///console.log(userParam);
-    if (await User.findOne({ username: userParam.username })) {
+    if (await User.findOne({ email: userParam.email })) {
         // 존재하면 에러처리
-        throw 'Username "' + userParam.username + '" is already taken';
+        throw '이메일 "' + userParam.email + '" 이 존재합니다.';
     }
 
     // 입력 받은 userParam 을 user 프로퍼티로 세팅
