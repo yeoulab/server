@@ -28,6 +28,8 @@ app.use(errorHandler);
 
 // start server
 const port = process.env.NODE_ENV === 'production' ? 80 : 4000;
+console.log(process.env.NODE_ENV);
 const server = app.listen(port, function() {
     console.log('Server listening on port ' + port);
+    console.log(process.env.MONGODB);
 });

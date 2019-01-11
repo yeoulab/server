@@ -6,7 +6,13 @@ const mongoose = require('mongoose');
 // command line 에서 확인하는 바업
 // mongo testDb
 // db.테이블명.find()
-mongoose.connect(config.connectionString);
+//"mongodb://localhost:27017/testDb",
+if (process.env.MONGODB_PORT_27017_TCP_ADDR === undefined) {
+    process.env.MONGODB_PORT_27017_TCP_ADDR = 'localhost';
+}
+console.log("process.env.MONGODB_PORT_27017_TCP_ADDR : " + process.env.MONGODB_PORT_27017_TCP_ADDR);
+const mongoUrl = "mongodb://" + process.env.MONGODB_PORT_27017_TCP_ADDR + ":27017/testDb";
+mongoose.connect(mongoUrl);
 mongoose.Promise = global.Promise;
 
 // 연결정보 확인
