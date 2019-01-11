@@ -1,5 +1,27 @@
 version: 2
 jobs:
+  build:
+    brnaches:
+      only:
+        - master
+    machine: true
+    steps:
+      - checkout
+      - run: 
+          name: NodeJS Docker Build
+          command: docker build -t shinmaeng/jessie-node ./
+      - run:
+          name: Docker MongoDB Run
+          command: docker run --name mongodb -d -v /data/db:/data/db --hostname MONGODB --net=bridge --expose=27017 mongo mongod --bind_ip_all
+      - run:
+          name: Dokcer NodeJS Run
+          command: docker run -d --name jessie-nodejs -p 4000:4000 --link mongodb:mongodb shinmaeng/jessie-node
+      - run:
+          name: Confirm Docker container status
+          command: |
+            docker logs --follow jessie-nodejs &
+            docker ps -a
+            docker inspect jessie-nodejs    
   deploy:
     docker:
       - image: google/cloud-sdk
