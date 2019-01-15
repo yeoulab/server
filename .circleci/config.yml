@@ -46,6 +46,7 @@ jobs:
     docker:
       - image: google/cloud-sdk
     steps:
+      - checkout
       - run: |
           echo ${HOME}
           echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
