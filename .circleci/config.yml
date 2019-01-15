@@ -23,7 +23,9 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       - run:
           name: Run Test
-          command: npm start &        
+          command: |
+            echo pwd
+            npm start &        
     #steps:
     #  - checkout
     #  - run: 
@@ -57,6 +59,7 @@ jobs:
           command: |
             echo ${CIRCLE_SHA1}
             echo ${GOOGLE_PROJECT_ID}
+            echo pwd
             ls -lr
             docker build \
               --build-arg COMMIT_REF=${CIRCLE_SHA1} \
