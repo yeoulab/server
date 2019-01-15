@@ -7,7 +7,6 @@ jobs:
     #machine: true
     docker:
       - image: circleci/node:10
-    workding_directory: ~/repo
     steps:
       - checkout
       - restore_cache:
