@@ -10,6 +10,7 @@ jobs:
     workding_directory: ~/repo
     steps:
       - checkout
+      - setup_remote_docker
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "package.json" }}
@@ -37,8 +38,7 @@ jobs:
             #gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://eu.gcr.io
             docker run --name mongodb -d -v /data/db:/data/db --hostname MONGODB --net=bridge --expose=27017 mongo mongod --bind_ip_all 
             docker run --name yeoul_nodejs -d -p 4000:4000 --link mongodb:mongodb -it --net=bridge shinmaeng/${GOOGLE_PROJECT_ID}/nodejs:${CIRCLE_SHA1}
-            #docker push shinmaeng/${GOOGLE_PROJECT_ID}/${PROJECT_NAME}:${CIRCLE_SHA1}
-            
+            #docker push shinmaeng/${GOOGLE_PROJECT_ID}/${PROJECT_NAME}:${CIRCLE_SHA1}          
     #steps:
     #  - checkout
     #  - run: 
@@ -65,7 +65,23 @@ jobs:
           echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
           echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
           gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
-          gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}      
+          gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+      - setup_remote_docker
+      - run:
+          name: Docker Build
+          command: |
+            echo ${CIRCLE_SHA1}
+            echo ${GOOGLE_PROJECT_ID}
+            docker build \
+              --build-arg COMMIT_REF=${CIRCLE_SHA1} \
+              --build-arg BUILD_DATE=`date -u +”%Y-%m-%dT%H:%M:%SZ”` \
+              -t ${GOOGLE_PROJECT_ID} .
+            docker tag ${GOOGLE_PROJECT_ID} shinmaeng/${GOOGLE_PROJECT_ID}/nodejs:${CIRCLE_SHA1}
+            #gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://eu.gcr.io
+            docker run --name mongodb -d -v /data/db:/data/db --hostname MONGODB --net=bridge --expose=27017 mongo mongod --bind_ip_all 
+            docker run --name yeoul_nodejs -d -p 4000:4000 --link mongodb:mongodb -it --net=bridge shinmaeng/${GOOGLE_PROJECT_ID}/nodejs:${CIRCLE_SHA1}
+            #docker push shinmaeng/${GOOGLE_PROJECT_ID}/${PROJECT_NAME}:${CIRCLE_SHA1}
+            
 workflows:
   version: 2
   build-deploy:
