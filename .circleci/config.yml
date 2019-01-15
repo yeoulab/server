@@ -27,10 +27,12 @@ jobs:
       - run:
           name: Docker Build
           command: |
-            docker build \
-              --build-arg COMMIT_REF=${CIRCLE_SHA1} \
-              --build-arg BUILD_DATE=`date -u +”%Y-%m-%dT%H:%M:%SZ”` \
-              -t ${PROJECT_NAME} .
+            echo ${PROJECT_NAME}
+            echo ${GOOGLE_PROJECT_ID}
+            docker build -t ${PROJECT_NAME} .
+              #--build-arg COMMIT_REF=${CIRCLE_SHA1} \
+              #--build-arg BUILD_DATE=`date -u +”%Y-%m-%dT%H:%M:%SZ”` \
+              #-t ${PROJECT_NAME} .
             docker tag ${PROJECT_NAME} shinmaeng/${GOOGLE_PROJECT_ID}/${PROJECT_NAME}:${CIRCLE_SHA1}
             #gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://eu.gcr.io
             docker run --name mongodb -d -v /data/db:/data/db --hostname MONGODB --net=bridge --expose=27017 mongo mongod --bind_ip_all 
