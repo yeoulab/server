@@ -28,6 +28,7 @@ jobs:
           name: Docker Build
           command: |
             echo ${PROJECT_NAME}
+            echo ${CIRCLE_SHA1}
             echo ${GOOGLE_PROJECT_ID}
             docker build -t ${PROJECT_NAME} .
               #--build-arg COMMIT_REF=${CIRCLE_SHA1} \
