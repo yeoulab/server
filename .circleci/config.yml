@@ -60,20 +60,19 @@ jobs:
       - run:
           name: Docker Build
           command: |
-            echo ${CIRCLE_SHA1}
-            echo ${GOOGLE_PROJECT_ID}
+            TAG=0.1.$CIRCLE_BUILD_NUM
             pwd
             ls -lr
             docker build \
               --build-arg COMMIT_REF=${CIRCLE_SHA1} \
               --build-arg BUILD_DATE=`date -u +”%Y-%m-%dT%H:%M:%SZ”` \
               -t ${GOOGLE_PROJECT_ID} .
-            docker tag ${GOOGLE_PROJECT_ID} shinmaeng/${GOOGLE_PROJECT_ID}/nodejs:${CIRCLE_SHA1}
+            docker tag ${GOOGLE_PROJECT_ID} shinmaeng/${GOOGLE_PROJECT_ID}/nodejs:${TAG}
             #gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://eu.gcr.io
             docker run --name mongodb -d -v /data/db:/data/db --hostname MONGODB --net=bridge --expose=27017 mongo mongod --bind_ip_all 
             docker run --name yeoul_nodejs -d -p 4000:4000 --link mongodb:mongodb -it --net=bridge shinmaeng/${GOOGLE_PROJECT_ID}/nodejs:${CIRCLE_SHA1}
             docker images
-            docker push shinmaeng/${GOOGLE_PROJECT_ID}/nodejs:${CIRCLE_SHA1}
+            docker push shinmaeng/${GOOGLE_PROJECT_ID}/nodejs:${TAG}
             
 workflows:
   version: 2
