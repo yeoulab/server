@@ -21,10 +21,10 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      - run
+      - run:
           name: Run Test
           command: npm start &
-      - run
+      - run:
           name: Docker Build
           command: |
             docker build \
