@@ -24,7 +24,7 @@ jobs:
       - run:
           name: Run Test
           command: |
-            echo pwd
+            pwd
             npm start &        
     #steps:
     #  - checkout
@@ -59,7 +59,7 @@ jobs:
           command: |
             echo ${CIRCLE_SHA1}
             echo ${GOOGLE_PROJECT_ID}
-            echo pwd
+            pwd
             ls -lr
             docker build \
               --build-arg COMMIT_REF=${CIRCLE_SHA1} \
