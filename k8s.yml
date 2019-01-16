@@ -15,8 +15,8 @@ apiVersion: app/node-js
 kind: Deployment
 metadata:
   name: ${PROJECT_NAME}
-  labels:
-    app: ${PROJECT_NAME}
+  #labels:
+    #app: ${PROJECT_NAME}
 spec:
   replicas: 2
   selector:
