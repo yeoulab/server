@@ -80,6 +80,7 @@ jobs:
           name: Deploy to VM in GCP
           command: |
             gcloud compute ssh docker-nodejs
+            pwd
             docker rm -f yeoul_nodejs
             docker run --name yeoul_nodejs -d -p 4000:4000 --link mongodb:mongodb -it --net=bridge gcr.io/${GOOGLE_PROJECT_ID}/nodejs:$TAG
       #- run:  
