@@ -76,12 +76,18 @@ jobs:
             #docker login -u $DOCKER_USER -p $DOCKER_PASS
             gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://gcr.io
             docker push gcr.io/${GOOGLE_PROJECT_ID}/nodejs:$TAG
-      - run:  
-          name: Deploy to Kubernetes
+      - run:
+          name: Deploy to VM in GCP
           command: |
-            envsubst < ${HOME}/project/k8s.yml > ${HOME}/patched_k8s.yml
-            kubectl apply -f ${HOME}/patched_k8s.yml
-            kubectl rollout status deployment/${PROJECT_NAME}            
+            gcloud compute ssh docker-nodejs
+            docker rm -f yeoul_nodejs
+            docker run --name yeoul_nodejs -d -p 4000:4000 --link mongodb:mongodb -it --net=bridge gcr.io/${GOOGLE_PROJECT_ID}/nodejs:$TAG
+      #- run:  
+      #    name: Deploy to Kubernetes
+      #    command: |
+      #      envsubst < ${HOME}/project/k8s.yml > ${HOME}/patched_k8s.yml
+      #      kubectl apply -f ${HOME}/patched_k8s.yml
+      #      kubectl rollout status deployment/${PROJECT_NAME}            
 workflows:
   version: 2
   build-deploy:
