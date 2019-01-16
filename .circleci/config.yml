@@ -92,6 +92,7 @@ jobs:
           name: Deploy to Kubernetes
           command: |
             pwd
+            echo ${PROJECT_NAME}
             envsubst < ${HOME}/project/k8s.yml > ${HOME}/patched_k8s.yml
             kubectl apply -f ${HOME}/patched_k8s.yml
             kubectl rollout status deployment/${PROJECT_NAME}            
