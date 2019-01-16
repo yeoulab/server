@@ -1,6 +1,6 @@
 kind: Service
 apiVersion: v1
-meatdata:
+metadata:
   name: ${PROJECT_NAME}
 spec:
   selector:
