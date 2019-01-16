@@ -54,7 +54,8 @@ jobs:
           gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
           gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
           #gcloud --quiet container clusters get-credentials ${GOOGLE_CLUSTER_NAME}
-          gcloud compute ssh docker-nodejs
+          ssh -i ~/.ssh/circleci myungjin_shin@35.221.64.133
+          #gcloud compute ssh docker-nodejs
           echo ${GOOGLE_COMPUTE_ZONE}
       - setup_remote_docker
       - run:
