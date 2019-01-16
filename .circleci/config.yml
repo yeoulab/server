@@ -68,6 +68,7 @@ jobs:
             TAG=0.1.$CIRCLE_BUILD_NUM
             pwd
             ls -lr
+            apt-get install -qq -y gettext
             docker build \
               --build-arg COMMIT_REF=${CIRCLE_SHA1} \
               --build-arg BUILD_DATE=`date -u +”%Y-%m-%dT%H:%M:%SZ”` \
