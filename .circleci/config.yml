@@ -53,11 +53,11 @@ jobs:
           echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
           gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
           gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
-          #gcloud --quiet container clusters get-credentials ${GOOGLE_CLUSTER_NAME}
+          gcloud --quiet container clusters get-credentials ${GOOGLE_CLUSTER_NAME}
           #ssh -i /home/myungjin_shin/.ssh/circleci myungjin_shin@35.221.64.133
           echo ${GOOGLE_COMPUTE_ZONE}
           pwd
-          gcloud compute ssh docker-nodejs
+          #gcloud compute ssh docker-nodejs
       - setup_remote_docker
       - run:
           name: Docker login
@@ -80,19 +80,19 @@ jobs:
             #docker login -u $DOCKER_USER -p $DOCKER_PASS
             gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://gcr.io
             docker push gcr.io/${GOOGLE_PROJECT_ID}/nodejs:$TAG
-      - run:
-          name: Deploy to VM in GCP
-          command: |
-            gcloud compute ssh docker-nodejs
-            pwd
-            docker rm -f yeoul_nodejs
-            docker run --name yeoul_nodejs -d -p 4000:4000 --link mongodb:mongodb -it --net=bridge gcr.io/${GOOGLE_PROJECT_ID}/nodejs:$TAG
-      #- run:  
-      #    name: Deploy to Kubernetes
+      #- run:
+      #    name: Deploy to VM in GCP
       #    command: |
-      #      envsubst < ${HOME}/project/k8s.yml > ${HOME}/patched_k8s.yml
-      #      kubectl apply -f ${HOME}/patched_k8s.yml
-      #      kubectl rollout status deployment/${PROJECT_NAME}            
+      #      gcloud compute ssh docker-nodejs
+      #      pwd
+      #      docker rm -f yeoul_nodejs
+      #      docker run --name yeoul_nodejs -d -p 4000:4000 --link mongodb:mongodb -it --net=bridge gcr.io/${GOOGLE_PROJECT_ID}/nodejs:$TAG
+      - run:  
+          name: Deploy to Kubernetes
+          command: |
+            envsubst < ${HOME}/project/k8s.yml > ${HOME}/patched_k8s.yml
+            kubectl apply -f ${HOME}/patched_k8s.yml
+            kubectl rollout status deployment/${PROJECT_NAME}            
 workflows:
   version: 2
   build-deploy:
