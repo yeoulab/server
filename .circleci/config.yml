@@ -93,9 +93,10 @@ jobs:
           command: |
             pwd
             echo ${PROJECT_NAME}
-            #envsubst < ${HOME}/project/k8s.yml > ${HOME}/patched_k8s.yml
-            #kubectl apply -f ${HOME}/patched_k8s.yml
-            kubectl apply -f ${HOME}/project/k8s.yml
+            echo ${GOOGLE_PROJECT_ID}
+            envsubst < ${HOME}/project/k8s.yml > ${HOME}/patched_k8s.yml
+            kubectl apply -f ${HOME}/patched_k8s.yml
+            #kubectl apply -f ${HOME}/project/k8s.yml
             kubectl rollout status deployment/${PROJECT_NAME}            
 workflows:
   version: 2
