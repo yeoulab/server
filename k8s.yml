@@ -22,6 +22,7 @@ spec:
       app: yeoul-home
   template:
     metadata:
+      name: yeoul-home-pod
       labels:
         app: yeoul-home
     spec:
