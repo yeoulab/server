@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: yeoul-nodejs
-        image: gcr.io/${GOOGLE_PROJECT_ID}/nodejs:$TAG
+        image: gcr.io/${GOOGLE_PROJECT_ID}/nodejs:${CIRCLE_SHA1}
         ports:
         - name: http
           containerPort: 4000
