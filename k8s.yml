@@ -16,7 +16,7 @@ kind: Deployment
 metadata:
   name: app-deploy
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: yeoul-home
@@ -24,7 +24,7 @@ spec:
     metadata:
       name: yeoul-home-pod
       labels:
-        app: yeoul-home
+        app: yeoul-home #Service의 selecotr 의 app:yeoul-home 과 일치해야함.
     spec:
       containers:
       - name: yeoul-nodejs
