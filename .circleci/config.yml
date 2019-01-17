@@ -93,7 +93,8 @@ jobs:
           command: |
             pwd
             echo ${PROJECT_NAME}
-            echo ${GOOGLE_PROJECT_ID}
+            ls -l
+            cat ${HOME}/project/k8s.yml
             envsubst < ${HOME}/project/k8s.yml > ${HOME}/patched_k8s.yml
             kubectl apply -f ${HOME}/patched_k8s.yml
             #kubectl apply -f ${HOME}/project/k8s.yml
