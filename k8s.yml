@@ -11,7 +11,7 @@ spec:
     targetPort: 4000
   type: LoadBalancer
 ---
-apiVersion: v1
+apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
   name: app-deploy
