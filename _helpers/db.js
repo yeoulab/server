@@ -12,8 +12,8 @@ if (process.env.MONGODB_PORT_27017_TCP_ADDR === undefined) {
 }
 console.log("process.env.MONGODB_PORT_27017_TCP_ADDR : " + process.env.MONGODB_PORT_27017_TCP_ADDR);
 //const mongoUrl = "mongodb://" + process.env.MONGODB_PORT_27017_TCP_ADDR + ":27017/testDb";
-//const mongoUrl = "mongodb://10.146.0.2:27017/testDb";
-const mongoUrl = "mongodb://localhost:27017/testDb";
+const mongoUrl = "mongodb://10.146.0.2:27017/testDb";
+//const mongoUrl = "mongodb://localhost:27017/testDb";
 
 
 mongoose.connect(mongoUrl);
