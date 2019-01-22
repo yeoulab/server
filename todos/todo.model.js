@@ -6,6 +6,7 @@ const schema = new Schema({
     userId: { type: String, required: true },
     todoName: { type: String, required: true },
     createdDate: { type: Date, default: Date.now, required: true },
+    guid: { type: String, required: true },
     deleted: { type: Boolean },
 
 });

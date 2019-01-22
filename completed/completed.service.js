@@ -31,6 +31,13 @@ async function rmCompletedTodo(todo) {
     });
 }
 
+async function removeAll(todo) {
+    console.log("rmCompletedTodo");
+    await Completed.findByIdAndRemove({ userId: todo.userId, _id: todo.completedTodoId }, (err) => {
+        console.log(err);
+    });
+}
+
 async function getCompletedTodo(userId, completedDate) {
     console.log("getCompletedTodo Start");
     console.log(userId + " ---- " + completedDate);
