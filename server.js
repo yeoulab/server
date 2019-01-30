@@ -21,6 +21,7 @@ app.use(jwt());
 app.use('/users', require('./users/users.controller'));
 app.use('/todos', require('./todos/todo.controller'));
 app.use('/complete', require('./completed/completed.controller'));
+app.use('/social', require('./social/naver.controller'));
 // api todos 는 또 다른 걸 이용하자.
 
 // global error handler

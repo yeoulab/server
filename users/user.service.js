@@ -13,7 +13,7 @@ module.exports = {
     getById,
     create,
     update,
-    delete: _delete
+    delete: _delete,
 };
 
 async function authenticate({ email, password }) {
