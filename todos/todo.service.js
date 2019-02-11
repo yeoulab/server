@@ -38,8 +38,26 @@ async function confirmTodo(todoParam) {
         // 1. INSERT 대상건
         if (todoParam.todos[i].addYn == true) {
             console.log("Todo Insert 시작");
-            await todo.save((err) => {
-                console.log(err);
+            // await todo.save((err) => {
+            //     console.log(err);
+            // });
+            await Todo.findOneAndUpdate({
+                userId: todoParam.todos[i].userId,
+                guid: todoParam.todos[i].guid
+            }, {
+                $set: {
+                    userId: todoParam.todos[i].userId,
+                    todoName: todoParam.todos[i].todoName,
+                    guid: todoParam.todos[i].guid
+                }
+            }, {
+                upsert: true
+            }).then((log) => {
+                console.log("log");
+                console.log(log);
+            }).catch((error) => {
+                console.log("error");
+                console.log(error);
             });
         }
         // 2. DELETE 대상건

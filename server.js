@@ -5,7 +5,8 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const jwt = require('_helpers/jwt');
 const errorHandler = require('_helpers/error-handler');
-const history = require('connect-history-api-fallback');
+const winston = require('winston');
+// const history = require('connect-history-api-fallback');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -28,7 +29,7 @@ app.use('/social', require('./social/naver.controller'));
 // global error handler
 app.use(errorHandler);
 
-app.use(history());
+// app.use(history());
 
 // start server
 const port = process.env.NODE_ENV === 'production' ? 80 : 4000;
