@@ -17,7 +17,8 @@ function jwt() {
             '/users/register',
             '/social/naverlogin',
             '/social/naverCallback',
-            '/social/naverInfo'
+            '/social/naverInfo',
+            '/social/naverGetCode',
         ]
     });
 }

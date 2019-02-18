@@ -6,8 +6,16 @@ const userService = require('./naver.service');
 router.get('/naverlogin', naverlogin);
 router.post('/naverCallback', naverCallback);
 router.post('/naverInfo', naverInfo);
+router.get('/naverGetCode', naverGetCode);
 
 module.exports = router;
+
+function naverGetCode(req, res, next) {
+    console.log("naverInfo start");
+    userService.naverGetCode(req, res)
+        .then()
+        .catch();
+}
 
 function naverInfo(req, res, next) {
     console.log("naverInfo start");
