@@ -16,7 +16,7 @@ const mongoUrl = "mongodb://" + process.env.MONGODB_PORT_27017_TCP_ADDR + ":2701
 //const mongoUrl = "mongodb://localhost:27017/testDb";
 
 
-mongoose.connect(mongoUrl);
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useCreateIndex: true });
 mongoose.Promise = global.Promise;
 
 // 연결정보 확인
