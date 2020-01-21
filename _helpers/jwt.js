@@ -13,12 +13,12 @@ function jwt() {
     return expressJwt({ secret, isRevoked }).unless({
         path: [
             // public routes that don't require authentication
-            '/users/authenticate',
-            '/users/register',
-            '/social/naverlogin',
-            '/social/naverCallback',
-            '/social/naverInfo',
-            '/social/naverGetCode',
+            '/server/users/authenticate',
+            '/server/users/register',
+            '/server/social/naverlogin',
+            '/server/social/naverCallback',
+            '/server/social/naverInfo',
+            '/server/social/naverGetCode',
         ]
     });
 }
