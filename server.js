@@ -5,7 +5,8 @@ var os = require('os');
 var uuid = require('uuid');
 var instance_id = uuid.v4();
 var cpuCount = os.cpus().length;
-var workerCount = cpuCount / 2;
+var workerCount = 1;
+//var workerCount = cpuCount / 2;
 //--------------------------------------
 
 if (cluster.isMaster) {
@@ -69,10 +70,10 @@ if (cluster.isMaster) {
     app.use(jwt());
 
     // api routes
-    app.use('/users', require('./users/users.controller'));
-    app.use('/todos', require('./todos/todo.controller'));
-    app.use('/complete', require('./completed/completed.controller'));
-    app.use('/social', require('./social/naver.controller'));
+    app.use('/server/users', require('./users/users.controller'));
+    app.use('/server/todos', require('./todos/todo.controller'));
+    app.use('/server/complete', require('./completed/completed.controller'));
+    app.use('/server/social', require('./social/naver.controller'));
     // api todos 는 또 다른 걸 이용하자.
 
     // global error handler
