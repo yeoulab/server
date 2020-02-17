@@ -21,9 +21,9 @@ async function naverGetCode(req, res) {
     var state = req.query.state;
 
     if (state === "register") {
-        res.writeHead(301, { Location: 'http://yeoulab.ml/#/register?&code=' + code + '&state=' + state });
+        res.writeHead(301, { Location: 'http://yeoulab.ga/#/register?&code=' + code + '&state=' + state });
     } else if (state === "login") {
-        res.writeHead(301, { Location: 'http://yeoulab.ml/#/login?&code=' + code + '&state=' + state });
+        res.writeHead(301, { Location: 'http://yeoulab.ga/#/login?&code=' + code + '&state=' + state });
     }
 
 
